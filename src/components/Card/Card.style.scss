@@ -1,0 +1,139 @@
+@mixin md {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+.card-container {
+  border-bottom: 1px solid #000;
+  padding: 20px;
+  transition: all 1s ease-in-out;
+  height: 200px;
+  width: auto;
+  @include md {
+    height: 250px;
+  }
+  .profile-image {
+    width: 150px;
+    transition: all 1s ease-in-out;
+    font-weight: bold;
+  }
+  .fadeImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    opacity: 0;
+    animation: fade-in-img-animation ease 1s;
+    -webkit-animation: fade-in-img-animation ease 1s;
+    -moz-animation: fade-in-img-animation ease 1s;
+    -o-animation: fade-in-img-animation ease 1s;
+    -ms-animation: fade-in-img-animation ease 1s;
+  }
+}
+.clickedRow {
+  .profile-image {
+    filter: brightness(50%);
+  }
+  p {
+    color: #0052cc;
+  }
+}
+
+.fade-in {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in-img {
+  animation: fade-in-img-animation ease 1s;
+  -webkit-animation: fade-in-img-animation ease 1s;
+  -moz-animation: fade-in-img-animation ease 1s;
+  -o-animation: fade-in-img-animation ease 1s;
+  -ms-animation: fade-in-img-animation ease 1s;
+}
+@keyframes fade-in-img-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes fade-in-img-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fade-in-img-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes fade-in-img-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

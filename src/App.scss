@@ -1,0 +1,9 @@
+.App {
+  transition: all 3s linear;
+  .pagination {
+    ul {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

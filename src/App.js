@@ -1,25 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
+import Card from './components/Card/Card';
+import LoadingModal from './components/LoadingModal/LoadingModal';
+import Pagination from "react-pagination-library";
+import "react-pagination-library/build/css/index.css";
+import axios from 'axios';
+import Header from './components/Header/Header';
+import ErrorModal from './components/ErrorModal/ErrorModal';
 
-function App() {
+
+const App = () => {
+  const [users, setUsers] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    axios.get(process.env.REACT_APP_GIT_URL + `${pageNumber}`)
+      .then(repsonse => setUsers(repsonse.data))
+      .then(() => setIsLoaded(true))
+      .catch(err => {
+        console.log(err.message);
+        setError(err.message)
+      })
+  }, [pageNumber]);
+
+
+  const changeCurrentPage = numPage => {
+    if (pageNumber === numPage) {
+      return
+    } else {
+      setIsLoaded(false);
+      setPageNumber(numPage);
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    error ? <ErrorModal message={error} /> : (
+      <div className="App">
+        <Header title="Gists" />
+        {isLoaded ?
+          <Card
+            data={users}
+          /> : <LoadingModal />}
+        <Pagination
+          currentPage={pageNumber}
+          totalPages={100}
+          changeCurrentPage={changeCurrentPage}
+          theme="bottom-border"
+        />
+      </div>
+    )
+
   );
 }
 
