@@ -25,14 +25,19 @@ const App = () => {
       })
   }, [pageNumber]);
 
+  const scrollToTopHandler = () => {
+    if (isLoaded) {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  }
 
   const changeCurrentPage = numPage => {
+    setIsLoaded(false);
     if (pageNumber === numPage) {
       return
     } else {
-      setIsLoaded(false);
       setPageNumber(numPage);
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+      scrollToTopHandler();
     }
   };
 
